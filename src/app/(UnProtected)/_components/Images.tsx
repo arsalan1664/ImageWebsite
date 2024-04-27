@@ -31,6 +31,7 @@ async function Images({ images }: { images: any }) {
         {images?.posts.map(
           (item: { id: string; imageUrl: string | StaticImport }) => (
             <Image
+              key={item.id}
               src={item.imageUrl}
               width={500}
               height={500}

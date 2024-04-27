@@ -122,8 +122,8 @@ export default async function PhotoCard({ id }: { id: string }) {
       </div>
       <div className="p-6 ">
         <div className="gap-2 grid grid-cols-5 font-sans text-sm font-normal leading-normal  antialiased opacity-75">
-          {tags.map((item) => (
-            <Badge>{item}</Badge>
+          {tags.map((item, i) => (
+            <Badge key={i}>{item}</Badge>
           ))}
         </div>
       </div>
