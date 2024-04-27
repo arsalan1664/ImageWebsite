@@ -1,0 +1,81 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.0.x", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tags {
+  id        String    @id @default(uuid())
+  title     String
+  postTags  PostTag[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model PostTag {
+  id        String   @id @default(uuid())
+  post      Posts?   @relation(fields: [postId], references: [id])
+  postId    String
+  tag       Tags?    @relation(fields: [tagId], references: [id])
+  tagId     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Posts {
+  id           String      @id @default(uuid())
+  imageUrl     String
+  title        String
+  description  String
+  postTags     PostTag[]
+  category     Categories? @relation(fields: [categoriesId], references: [id])
+  categoriesId String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model Categories {
+  id              String    @id @default(uuid())
+  title           String
+  metaTitle       String
+  description     String
+  metaDescription String
+  slug            String
+  imageUrl        String
+  articles        String
+  posts           Posts[]
+  section         Sections? @relation(fields: [sectionId], references: [id])
+  sectionId       String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Script {
+  id          String   @id @default(uuid())
+  script      String
+  src         String
+  crossOrigin String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model User {
+  id           String   @id @default(uuid())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Sections {
+  id          String       @id @default(uuid())
+  title       String
+  description String
+  categories  Categories[] // Use the plural form of the related model
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
