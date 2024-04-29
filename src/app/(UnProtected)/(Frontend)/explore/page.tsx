@@ -1,6 +1,6 @@
 import { GetSection } from "@/app/(Backend)/actions/section/getSection";
 import { Categories } from "../../_components/Carousel";
-import Link from "next/link";
+
 
 export default async function Explore() {
   const data = await GetSection();

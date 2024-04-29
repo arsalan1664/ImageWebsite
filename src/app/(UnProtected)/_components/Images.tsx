@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-async function Images({ images }: { images: any }) {
+function Images({ images }: { images: any }) {
   const router = useRouter();
   // const images = await GetPost();
   // const images = [

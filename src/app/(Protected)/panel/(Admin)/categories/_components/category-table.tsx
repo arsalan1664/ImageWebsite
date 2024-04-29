@@ -30,7 +30,7 @@ export async function CategoryTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.categories?.map((item: any) => (
+          {data?.categories?.map((item: any) => (
             <TableRow key={item.id}>
               <TableCell>{idCounter++}</TableCell>
               <TableCell>

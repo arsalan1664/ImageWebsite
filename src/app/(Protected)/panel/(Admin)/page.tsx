@@ -8,6 +8,10 @@ import { GetSection } from "@/app/(Backend)/actions/section/getSection";
 import { GetCategory } from "@/app/(Backend)/actions/category/getCategory";
 import { GetPost } from "@/app/(Backend)/actions/post/getPost";
 
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+///// the code is inserted because of prerender error occure during build process
+
 async function Dashboard() {
   const tag = await GetTag();
   const category = await GetCategory();

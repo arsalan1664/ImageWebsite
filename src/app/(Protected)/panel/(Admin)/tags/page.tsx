@@ -1,6 +1,10 @@
 import { GetTag } from "@/app/(Backend)/actions/tag/getTag";
 import Header from "../../../_components/Header";
-import { Form, Loop } from "./tagForm";
+import { Form, Loop } from "./_components/tagForm";
+
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+///// the code is inserted because of prerender error occure during build process
 
 async function page() {
   const data = await GetTag();
