@@ -50,25 +50,25 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): Promise<any> {
   try {
     const tokenValidation = validateBearerToken(request);
 
     if (!tokenValidation.valid) {
       return NextResponse.json(
-        { error: tokenValidation.message },
+        { error: tokenValidation?.message || "not valid token" },
         { status: 401 }
       );
     }
 
     const body = await request.json();
-    const data = body.tag;
-    if (!data) return { error: `Tag Can Not Be Empty` };
-    const capitalize_value = data.charAt(0).toUpperCase() + data.slice(1);
+    const title = body.tag;
+    if (!title) return { error: `Tag Can Not Be Empty` };
+    // const capitalize_value = data.charAt(0).toUpperCase() + data.slice(1);
 
     const tag = await db.tags.create({
       data: {
-        title: capitalize_value,
+        title,
       },
     });
 

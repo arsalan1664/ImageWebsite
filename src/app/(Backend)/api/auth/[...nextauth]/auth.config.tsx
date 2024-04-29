@@ -1,8 +1,8 @@
 import { getUserByUsername } from "@/lib/db-util";
-import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authSchema } from "@/lib/zod";
 import bcrypt from "bcryptjs";
+import type { NextAuthConfig } from "next-auth";
 
 export default {
   providers: [

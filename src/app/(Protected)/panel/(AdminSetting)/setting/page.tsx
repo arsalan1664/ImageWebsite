@@ -21,13 +21,14 @@ export default function SettingsProfilePage() {
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { DynamicButton } from "@/app/(UnProtected)/login/page";
 import updateAction from "@/app/(Backend)/actions/auth/updateCredentials";
 import { useFormState, useFormStatus } from "react-dom";
 import { toast } from "sonner";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
-export function InputWithLabel() {
+function InputWithLabel() {
   const [state, dispatch] = useFormState(updateAction, null);
   useEffect(() => {
     if (state?.success) {
@@ -67,3 +68,18 @@ export function InputWithLabel() {
     </form>
   );
 }
+
+const DynamicButton = ({ title }: { title: string }) => {
+  const { pending } = useFormStatus();
+  return (
+    <Button className="w-full" type="submit" disabled={pending}>
+      {pending ? (
+        <>
+          <Loader2 className="animate-spin h-5 w-5 mr-2" /> Loading...
+        </>
+      ) : (
+        title
+      )}
+    </Button>
+  );
+};

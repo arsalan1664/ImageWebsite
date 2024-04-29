@@ -89,7 +89,7 @@ export default function Login() {
   );
 }
 
-export const DynamicButton = ({ title }: { title: string }) => {
+const DynamicButton = ({ title }: { title: string }) => {
   const { pending } = useFormStatus();
   return (
     <Button className="w-full" type="submit" disabled={pending}>

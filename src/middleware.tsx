@@ -1,3 +1,4 @@
+import type { NextAuthConfig } from "next-auth";
 import NextAuth from "next-auth";
 import authConfig from "./app/(Backend)/api/auth/[...nextauth]/auth.config";
 
@@ -10,9 +11,10 @@ import {
 
 const { auth } = NextAuth(authConfig);
 
-export default auth((req: { auth?: any; nextUrl?: any }) => {
+export default auth((req) => {
+  console.log("Request", req.nextUrl);
   // return null;
-  const { nextUrl } = req;
+  const nextUrl = req.nextUrl;
   const isLoggedIn = !!req.auth;
   // const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isApiAuthRoute = apiAuthPrefix.includes(nextUrl.pathname);
@@ -22,24 +24,22 @@ export default auth((req: { auth?: any; nextUrl?: any }) => {
 
   // to protect api
   if (isApiAuthRoute) {
-    return null;
+    return;
   }
-  // to protect login
+  // // to protect login
   if (isAuthRoute) {
     if (isLoggedIn) {
       return Response.redirect(new URL(DEFAULT_REDIRECT_PAGE, nextUrl));
     }
-    return null;
+    return;
   }
 
   if (isAdminRoutes && !isLoggedIn) {
     return Response.redirect(new URL("/login", nextUrl));
   }
 
-  return null;
+  return;
 });
-
-// Optionally, don't invoke Middleware on some paths
 
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/c", "/(api|trpc)(.*)"],
