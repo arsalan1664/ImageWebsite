@@ -1,4 +1,5 @@
 "use client";
+
 import logoutAction from "@/app/(Backend)/actions/auth/logoutAction";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,8 +9,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Package2Icon, ReplyIcon, RotateCcw } from "lucide-react";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { Package2Icon } from "lucide-react";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -18,8 +19,10 @@ import { toast } from "sonner";
 function Header({ title }: { title: string }) {
   const router = useRouter();
   const logout = async () => {
+    console.log("login");
     const response = await logoutAction();
     if (response.success) {
+      console.log("login");
       router.push("/login");
     }
     if (response.error) {

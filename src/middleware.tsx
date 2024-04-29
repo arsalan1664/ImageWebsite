@@ -11,8 +11,7 @@ import {
 
 const { auth } = NextAuth(authConfig);
 
-export default auth((req) => {
-  console.log("Request", req.nextUrl);
+export default auth((req): any => {
   // return null;
   const nextUrl = req.nextUrl;
   const isLoggedIn = !!req.auth;
@@ -24,21 +23,20 @@ export default auth((req) => {
 
   // to protect api
   if (isApiAuthRoute) {
-    return;
+    return null;
   }
   // // to protect login
   if (isAuthRoute) {
     if (isLoggedIn) {
       return Response.redirect(new URL(DEFAULT_REDIRECT_PAGE, nextUrl));
     }
-    return;
+    return null;
   }
 
   if (isAdminRoutes && !isLoggedIn) {
     return Response.redirect(new URL("/login", nextUrl));
   }
-
-  return;
+  return null;
 });
 
 export const config = {
