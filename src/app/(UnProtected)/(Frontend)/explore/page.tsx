@@ -1,6 +1,9 @@
 import { GetSection } from "@/app/(Backend)/actions/section/getSection";
 import { Categories } from "../../_components/Carousel";
 
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+///// the code is inserted because of prerender error occure during build process
 
 export default async function Explore() {
   const data = await GetSection();
