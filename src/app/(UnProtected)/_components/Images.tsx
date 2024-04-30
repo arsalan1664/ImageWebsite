@@ -1,9 +1,10 @@
 "use client";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Loader2Icon } from "lucide-react";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 
 function Images({ images }: { images: any }) {
   const router = useRouter();
@@ -26,8 +27,8 @@ function Images({ images }: { images: any }) {
   //   "https://source.unsplash.com/qAaGXj-AOv4",
   // ];
   return (
-    <div className="p-5 md:p-10 ">
-      <div className=" columns-1 gap-5 sm:columns-2 lg:columns-3 lg:gap-8 xl:columns-4 [&>img:not(:first-child)]:mt-5 lg:[&>img:not(:first-child)]:mt-8">
+    <div className="p-5 md:p-10">
+      <div className="columns-1 gap-5 sm:columns-2 lg:columns-3 lg:gap-8 xl:columns-4 [&>img:not(:first-child)]:mt-5 lg:[&>img:not(:first-child)]:mt-8">
         {images?.posts.map(
           (item: { id: string; imageUrl: string | StaticImport }) => (
             <Image
@@ -47,3 +48,5 @@ function Images({ images }: { images: any }) {
 }
 
 export default Images;
+
+
