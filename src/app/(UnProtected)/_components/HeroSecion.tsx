@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Animated_Search from "./Animated_Search";
-import { MovingButton } from "@/components/ui/moving-button";
-import { Rocket, Telescope } from "lucide-react";
+import { Rocket } from "lucide-react";
 
 export default function Component() {
   return (

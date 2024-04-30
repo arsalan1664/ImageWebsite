@@ -13,6 +13,7 @@ export async function AddTag(state: any, formData: FormData) {
     process.env.NODE_ENV === "development"
       ? process.env.URL + `/api/tags`
       : process.env.NEXT_PUBLIC_VERCEL_URL + `/api/tags`;
+
   const response = await fetch(url, {
     headers: {
       Authorization: token,
@@ -21,6 +22,10 @@ export async function AddTag(state: any, formData: FormData) {
     body: JSON.stringify(data),
   });
 
+  if (!response.ok) {
+    console.log(response);
+    return { error: "Bad response" };
+  }
   const res = await response.json();
   revalidatePath("/", "layout");
   return res;

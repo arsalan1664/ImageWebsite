@@ -14,7 +14,7 @@ export default async function Category({ params }: { params: { id: string } }) {
     },
   });
   const imageUrl = categories?.imageUrl as string;
-  console.log(categories?.posts);
+
   return (
     <div className="">
       <div className="relative">
@@ -36,7 +36,7 @@ export default async function Category({ params }: { params: { id: string } }) {
       </div>
       {/* <div className="container mx-auto grid grid-cols-3 gap-4 p-4">
         <div className="col-span-2">
-          <img
+          <Image
             alt="Advertise on Unsplash"
             className="w-full"
             height="300"

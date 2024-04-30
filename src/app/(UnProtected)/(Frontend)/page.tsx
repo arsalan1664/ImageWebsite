@@ -4,6 +4,7 @@ import Images from "../_components/Images";
 import { GetPost } from "@/app/(Backend)/actions/post/getPost";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Loader2Icon } from "lucide-react";
+import { TabCarousel } from "../_components/TabCarousel";
 
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
@@ -14,7 +15,7 @@ async function Home() {
   return (
     <>
       <HeroSection />
-
+      <TabCarousel />
       <Suspense fallback={<Loading />}>
         <Images images={images} />
       </Suspense>

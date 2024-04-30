@@ -52,7 +52,7 @@ function Sidebar() {
   }
 
   return (
-    <aside className="flex h-full max-h-screen flex-col gap-2">
+    <aside className="flex h-full min-h-screen flex-col gap-2">
       <div className="flex h-[60px] items-center border-b dark:border-b-zinc-700/30 px-6">
         <Link className="flex items-center gap-2 font-semibold" href="#">
           <Package2Icon className="h-6 w-6" />

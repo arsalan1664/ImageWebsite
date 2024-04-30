@@ -1,6 +1,6 @@
 import { GetTag } from "@/app/(Backend)/actions/tag/getTag";
-import Header from "../../../_components/Header";
 import { Form, Loop } from "./_components/tagForm";
+import Header from "@/app/(Protected)/_components/Header";
 
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";

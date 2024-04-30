@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Package2Icon } from "lucide-react";
+import Image from "next/image";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -43,15 +44,11 @@ function Header({ title }: { title: string }) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button className="rounded-full" size="icon" variant="ghost">
-              <img
+              <Image
                 alt="Avatar"
                 className="rounded-full"
                 height="32"
-                src="https://vercel.com/api/www/avatar/KsiAhjUApMop2IPifCXWsbxt?s=64"
-                style={{
-                  aspectRatio: "32/32",
-                  objectFit: "cover",
-                }}
+                src="/avatar.svg"
                 width="32"
               />
             </Button>

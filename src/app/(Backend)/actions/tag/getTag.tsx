@@ -10,6 +10,11 @@ export async function GetTag() {
     method: "GET",
   });
 
+  if (!response.ok) {
+    console.log(response);
+    return { error: "Bad response" };
+  }
+
   const res = await response.json();
   return res;
 }

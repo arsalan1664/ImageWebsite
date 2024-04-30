@@ -27,7 +27,7 @@ export default function Login() {
   }
 
   return (
-    <section className="flex items-center justify-center h-screen bg-gradient-to-tl from-rose-100 to-teal-100 dark:bg-gradient-to-tl  dark:from-rose-200 dark:to-teal-600">
+    <section className="flex items-center justify-center h-screen bg-gradient-to-tl from-rose-100 to-teal-100 dark:bg-gradient-to-tl  dark:from-purple-950 dark:to-teal-900">
       <EaseIn>
         <form action={dispatch}>
           <Card className="w-[400px] ">
