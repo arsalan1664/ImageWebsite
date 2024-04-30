@@ -39,6 +39,7 @@ function Images({ images }: { images: any }) {
             imageUrl: string;
           }) => (
             <div
+              key={item.id}
               onClick={() => router.push(`/photos/${item.id}`)}
               className=" overflow-hidden   bg-background cursor-pointer rounded-xl relative group"
             >
