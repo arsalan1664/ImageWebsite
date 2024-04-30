@@ -12,7 +12,7 @@ export async function AddTag(state: any, formData: FormData) {
   const url =
     process.env.NODE_ENV === "development"
       ? process.env.URL + `/api/tags`
-      : process.env.VERCEL_URL + `/api/tags`;
+      : process.env.NEXT_PUBLIC_VERCEL_URL + `/api/tags`;
   const response = await fetch(url, {
     headers: {
       Authorization: token,

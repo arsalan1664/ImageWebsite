@@ -29,8 +29,8 @@ function Loading() {
     <>
       <div className="p-5 md:p-10 ">
         <div className=" columns-1 gap-5 sm:columns-2 lg:columns-3 lg:gap-8 xl:columns-4 [&>img:not(:first-child)]:mt-5 lg:[&>img:not(:first-child)]:mt-8">
-          {[1, 2, 3, 4].map((item) => (
-            <Skeleton className="h-[200px] w-[300px]" />
+          {[1, 2, 3, 4].map((item, i) => (
+            <Skeleton key={i} className="h-[200px] w-[300px]" />
           ))}
         </div>
       </div>
