@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import {
   Carousel,
   CarouselContent,
@@ -17,7 +16,7 @@ export async function TabCarousel() {
       opts={{
         align: "center",
       }}
-      className="w-[90%] mx-auto "
+      className="max-w-screen-lg mx-auto my-2"
     >
       <CarouselContent>
         {categories?.map((item: any) => (
@@ -27,11 +26,31 @@ export async function TabCarousel() {
                 href={`/c/${item.id}`}
                 className="flex items-center  border hover:border-purple-600 px-3 py-1 rounded-full"
               >
-                <p className="text-center mx-auto">{item.title}</p>
+                <span className="text-center mx-auto">{item.title}</span>
               </Link>
             </div>
           </CarouselItem>
         ))}
+        <CarouselItem className="basis-1/3 lg:basis-1/6">
+          <div className="">
+            <Link
+              href={`/explore`}
+              className="flex items-center  border hover:border-purple-600 px-3 py-1 rounded-full"
+            >
+              <p className="text-center mx-auto">Dummy</p>
+            </Link>
+          </div>
+        </CarouselItem>
+        <CarouselItem className="basis-1/3 lg:basis-1/6">
+          <div className="">
+            <Link
+              href={`/explore`}
+              className="flex items-center  border hover:border-purple-600 px-3 py-1 rounded-full"
+            >
+              <p className="text-center mx-auto">Dummy</p>
+            </Link>
+          </div>
+        </CarouselItem>
       </CarouselContent>
       <CarouselPrevious />
       <CarouselNext />

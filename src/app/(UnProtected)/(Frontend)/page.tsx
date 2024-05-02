@@ -5,6 +5,7 @@ import { GetPost } from "@/app/(Backend)/actions/post/getPost";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Loader2Icon } from "lucide-react";
 import { TabCarousel } from "../_components/TabCarousel";
+import { GetCategory } from "@/app/(Backend)/actions/category/getCategory";
 
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
@@ -12,6 +13,8 @@ export const fetchCache = "force-no-store";
 
 async function Home() {
   const images = await GetPost();
+  const { categories } = await GetCategory();
+
   return (
     <>
       <HeroSection />

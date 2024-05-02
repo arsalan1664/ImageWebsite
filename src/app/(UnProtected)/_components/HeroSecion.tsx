@@ -4,7 +4,7 @@ import { Rocket } from "lucide-react";
 
 export default function Component() {
   return (
-    <section className="w-full py-6 md:py-12  h-[500px]">
+    <section className="w-full py-6 md:py-12  h-[550px]">
       <div className="container px-4 md:px-6 h-full">
         <div className="flex flex-col items-center justify-center space-y-2 text-center h-full gap-4">
           <div className="space-y-2">

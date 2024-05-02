@@ -15,7 +15,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="absolute h-screen w-screen m-auto">
+    <div className="mt-36 h-screen w-screen m-auto">
       <h2>Something went wrong!</h2>
       <button
         onClick={
