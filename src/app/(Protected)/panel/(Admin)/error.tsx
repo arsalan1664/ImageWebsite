@@ -18,14 +18,7 @@ export default function Error({
   return (
     <div className=" flex justify-center items-center h-screen w-full ">
       <h2>Something went wrong!</h2>
-      <Button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </Button>
+      <Button onClick={() => reset()}>Try again</Button>
     </div>
   );
 }

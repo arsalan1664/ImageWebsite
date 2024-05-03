@@ -48,8 +48,8 @@ function SearchDropDown({ query }: { query: string | null }) {
           </CommandItem>
         ))}
       </CommandGroup>
-      <CommandSeparator />
-      <CommandGroup heading="Tags">
+      {/* <CommandSeparator /> */}
+      {/* <CommandGroup heading="Tags">
         <CommandItem>
           <Tag className="mr-2 h-4 w-4" />
           <span>Profile</span>
@@ -62,7 +62,7 @@ function SearchDropDown({ query }: { query: string | null }) {
           <Tag className="mr-2 h-4 w-4" />
           <span>Settings</span>
         </CommandItem>
-      </CommandGroup>
+      </CommandGroup> */}
     </CommandList>
   );
 }
