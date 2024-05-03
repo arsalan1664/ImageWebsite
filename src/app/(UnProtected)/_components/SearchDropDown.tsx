@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   CommandEmpty,
   CommandGroup,
@@ -13,6 +13,19 @@ import { useRouter } from "next/navigation";
 
 function SearchDropDown({ query }: { query: string | null }) {
   const router = useRouter();
+  const [categories, setCategories] = useState<any[] | null>(null);
+
+  const handleAction = async () => {
+    try {
+      const { categories } = await GetCategory();
+      setCategories(categories);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    handleAction();
+  }, []);
   return (
     <CommandList
       className={
@@ -25,14 +38,15 @@ function SearchDropDown({ query }: { query: string | null }) {
         No results found.
       </CommandEmpty>
       <CommandGroup heading="Categories">
-        <CommandItem
-          onSelect={() =>
-            router.push("/c/46074532-1f34-4d72-98aa-6bf72c58acf7")
-          }
-        >
-          <Layers3 className="mr-2 h-4 w-4" />
-          <span>Wallpaper</span>
-        </CommandItem>
+        {categories?.map((item) => (
+          <CommandItem
+            key={item.id}
+            onSelect={() => router.push(`/c/${item.id}`)}
+          >
+            <Layers3 className="mr-2 h-4 w-4" />
+            <span>{item.title}</span>
+          </CommandItem>
+        ))}
       </CommandGroup>
       <CommandSeparator />
       <CommandGroup heading="Tags">

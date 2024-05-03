@@ -47,6 +47,12 @@ function SearchImages({ images }: { images: any }) {
           )
         )}
       </div>
+
+      {images.length === 0 && (
+        <div className="flex items-center justify-center w-full border rounded-lg h-56">
+          <h2 className="">Not Found</h2>
+        </div>
+      )}
     </div>
   );
 }

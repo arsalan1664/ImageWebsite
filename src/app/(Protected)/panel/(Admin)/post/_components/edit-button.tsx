@@ -68,63 +68,6 @@ export function EditButton({ data }: { data: any }) {
   }, []);
 
   return (
-    // <Dialog>
-    //   <DialogTrigger asChild>
-    //     <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-    //       <Pencil size={16} className="mr-2" /> Edit
-    //     </DropdownMenuItem>
-    //   </DialogTrigger>
-    //   <DialogContent className="sm:max-w-[800px]">
-    //     <DialogHeader>
-    //       <DialogTitle>Edit Post</DialogTitle>
-    //       <DialogDescription>
-    //         Edit Post, Click save when you are done.
-    //       </DialogDescription>
-    //     </DialogHeader>
-    //     <form action={dispatch}>
-    //       <div className="grid grid-cols-2 gap-4 py-4">
-    //         <Input defaultValue={data.id} name="id" className="hidden" />
-    //         <div className="grid grid-cols-4 items-center gap-4">
-    //           <Label htmlFor="name" className="text-right">
-    //             Title
-    //           </Label>
-    //           <Input
-    //             defaultValue={data.title}
-    //             name="title"
-    //             className="col-span-3"
-    //             placeholder="Title"
-    //           />
-    //         </div>
-    //         <div className="grid grid-cols-4 items-center gap-4">
-    //           <Label htmlFor="username" className="text-right">
-    //             Description
-    //           </Label>
-    //           <Input
-    //             defaultValue={data.description}
-    //             name="description"
-    //             className="col-span-3"
-    //             placeholder="Description"
-    //           />
-    //         </div>
-    //         <div className="grid grid-cols-4 items-center gap-4">
-    //           <Label className="text-right">Category</Label>
-    //           <SelectCategory id={data.categoriesId} />
-    //         </div>
-    //         <div className="grid grid-cols-4 items-center gap-4">
-    //           <Label className="text-right">Tag</Label>
-    //           <SelectTag id={data.postTags.tagId} />
-    //         </div>
-    //         <div className="grid grid-cols-4 items-center gap-4">
-    //           <Label className="text-right">Image</Label>
-    //           <Input name="image" type="file" className="col-span-3" />
-    //         </div>
-    //       </div>
-    //       <DialogFooter>
-    //         <DynamicButton title="Save" />
-    //       </DialogFooter>
-    //     </form>
-    //   </DialogContent>{" "}
-    // </Dialog>
     <Dialog>
       <DialogTrigger asChild>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
@@ -140,6 +83,7 @@ export function EditButton({ data }: { data: any }) {
         </DialogHeader>
         <form action={dispatch}>
           <div className="grid grid-cols-2 gap-4 py-4">
+            <input name="id" defaultValue={data?.id} className="hidden" />
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="name" className="text-right">
                 Title

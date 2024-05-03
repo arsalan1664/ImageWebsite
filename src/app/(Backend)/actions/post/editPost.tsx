@@ -1,3 +1,4 @@
+"use server";
 import { revalidatePath } from "next/cache";
 
 export async function EditPost(state: any, formData: FormData) {
@@ -11,8 +12,8 @@ export async function EditPost(state: any, formData: FormData) {
     method: "PUT",
     body: formData,
   });
-
+  console.log(response.statusText);
   const res = await response.json();
-  revalidatePath("/", "layout");
+  revalidatePath("/");
   return res;
 }

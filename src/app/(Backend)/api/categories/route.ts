@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
+import fs from "fs/promises";
 
 export async function GET(request: NextRequest) {
   try {
@@ -100,6 +101,10 @@ export async function DELETE(request: NextRequest) {
       },
     });
 
+    const prevImage = existingCategoryItem.imageUrl;
+
+    await fs.unlink(`public${prevImage}`);
+
     return NextResponse.json(
       {
         message: "Category deleted successfully",
@@ -157,6 +162,8 @@ export async function POST(request: NextRequest) {
   try {
     // Example: Save to local filesystem (replace with your storage solution)
     const fs = require("fs/promises");
+    const dirPath = `public/uploads/covers/`;
+    await fs.mkdir(dirPath, { recursive: true });
     await fs.writeFile(
       `public/uploads/covers/${imageName}`,
       cover_image.stream()
@@ -221,7 +228,7 @@ export async function PUT(request: NextRequest) {
     const description = formData.get("description") as string;
     const metaTitle = formData.get("meta-title") as string;
     const metaDescription = formData.get("meta-description") as string;
-    // const cover_image = formData.get("cover-image") as any;
+    const cover_image = formData.get("cover-image") as any;
     const section = formData.get("section") as any;
 
     // Assuming you have a 'db' object for database access.
@@ -235,6 +242,22 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ message: "ID not matched" }, { status: 404 });
     }
 
+    const imageName = `${Date.now()}-${cover_image.name}`; // Unique filename
+    try {
+      // Example: Save to local filesystem (replace with your storage solution)
+
+      await fs.writeFile(
+        `public/uploads/covers/${imageName}`,
+        cover_image.stream()
+      );
+    } catch (error) {
+      console.error(error);
+      return NextResponse.json(
+        { message: "Image upload failed" },
+        { status: 400 }
+      );
+    }
+
     const updatedItem = await db.categories.update({
       where: {
         id,
@@ -245,11 +268,15 @@ export async function PUT(request: NextRequest) {
         description,
         metaDescription,
         slug: "body.Slug", // Modify as needed (e.g., generate slug from title)
-        // imageUrl: `/uploads/covers/${imageName}`, // Image URL path
+        imageUrl: `/uploads/covers/${imageName}`, // Image URL path
         section: { connect: { id: section } },
         articles: "body.Article",
       },
     });
+    // delete prev image
+    const prevImage = existingItem.imageUrl;
+
+    await fs.unlink(`public${prevImage}`);
 
     return NextResponse.json(
       {

@@ -104,7 +104,7 @@ export async function GET(request: NextRequest) {
 
     const posts = await db.posts.findMany({
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
       include: {
         category: true,
@@ -146,15 +146,21 @@ export async function PUT(request: NextRequest) {
     );
   }
 
-  // Image handling (replace with your preferred storage solution)
   const formData = await request.formData();
   const id = formData.get("id") as string;
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const categoryId = formData.get("category") as string;
-  const tagss = formData.get("tag") as string;
+  const tagss = formData.get("tag") as any;
+  const tags = tagss.split(",") as any;
   const image = formData.get("image") as any;
   const section = formData.get("section") as any; // Use Next.js built-in formData()
+
+  const existingItem = await db.posts.findUnique({
+    where: {
+      id,
+    },
+  });
 
   const imageName = `${Date.now()}-${image.name}`; // Unique filename
   try {
@@ -171,38 +177,43 @@ export async function PUT(request: NextRequest) {
       { status: 400 }
     );
   }
-  const tags = ["58e9ca85-c253-4b3c-a46d-5cb16738d8d6"];
-  // // Create the post (replace with your database interaction logic)
-  const post = await db.posts.update({
-    where: { id },
-    data: {
-      title,
-      description,
-      category: { connect: { id: categoryId } },
-      imageUrl: `/uploads/posts/${imageName}`, // Image URL path
 
-      postTags: {
-        connectOrCreate: tags.map((tag) => ({
-          where: { id: tag },
-          create: { tagId: tag },
-        })),
+  try {
+    const post = await db.posts.update({
+      where: { id },
+      data: {
+        title,
+        description,
+        category: { connect: { id: categoryId } },
+        imageUrl: `/uploads/posts/${imageName}`, // Image URL path
+
+        postTags: {
+          connectOrCreate: tags.map((tag: any) => ({
+            where: { id: tag },
+            create: { tagId: tag },
+          })),
+        },
       },
+      include: { postTags: true },
+    });
+    const prevImg = existingItem?.imageUrl;
 
-      // category:{ connect: { id: categoryId },
-      //   slug: "body.Slug", // Modify as needed (e.g., generate slug from title)
-      // category:{ connect: { id: categoryId },
-      //   articles: "body.Article", // Update based on your data structure
-    },
-    include: { postTags: true }, // Include connected tags
-  });
+    await fs.unlink(`public${prevImg}`);
 
-  return NextResponse.json(
-    {
-      post: post,
-      success: "Post update successfully",
-    },
-    { status: 201 }
-  );
+    return NextResponse.json(
+      {
+        post: post,
+        success: "Post update successfully",
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { error: "Something went wrong" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function DELETE(request: NextRequest) {
@@ -249,15 +260,8 @@ export async function DELETE(request: NextRequest) {
 
     await db.posts.delete({ where: { id } }); // Delete the post after handling tags
 
-    // // Delete the category with the specified ID
-    // await db.posts.delete({
-    //   where: {
-    //     id: id,
-    //   },
-    //   include: {
-    //     postTags: true,
-    //   },
-    // });
+    const prevImg = postToDelete?.imageUrl;
+    await fs.unlink(`public${prevImg}`);
 
     return NextResponse.json(
       {

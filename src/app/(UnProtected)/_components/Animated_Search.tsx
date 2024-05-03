@@ -26,7 +26,7 @@ import { useRouter } from "next/navigation";
 
 function Animated_Search() {
   const [value, setValue] = useState("");
-  const [query] = useDebounce(value, 800);
+  const [query] = useDebounce(value, 500);
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
   const handleSubmit = () => {

@@ -13,7 +13,6 @@ export const fetchCache = "force-no-store";
 
 async function Home() {
   const images = await GetPost();
-  const { categories } = await GetCategory();
 
   return (
     <>
