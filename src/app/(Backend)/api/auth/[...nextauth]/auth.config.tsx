@@ -21,7 +21,7 @@ export default {
             user.passwordHash
           );
 
-          if (passwordsMatch) return { name: user.id, email: user.username }; //// returing id in name because returning id in id is not working
+          if (passwordsMatch) return { id: user.id, name: user.username }; //// returing id in name because returning id in id is not working
         }
 
         return null;
