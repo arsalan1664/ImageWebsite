@@ -14,6 +14,6 @@ export async function AddSection(state: any, formData: FormData) {
   });
 
   const res = await response.json();
-  revalidatePath("/");
+  revalidatePath("/", "layout");
   return res;
 }
