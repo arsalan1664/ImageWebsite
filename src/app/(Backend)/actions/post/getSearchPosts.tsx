@@ -9,13 +9,11 @@ async function GetSearchPosts({ query }: { query: string }) {
           {
             title: {
               contains: query,
-              mode: "insensitive",
             },
           },
           {
             description: {
               contains: query,
-              mode: "insensitive",
             },
           },
         ],

@@ -31,26 +31,6 @@ export async function TabCarousel() {
             </div>
           </CarouselItem>
         ))}
-        <CarouselItem className="basis-1/3 lg:basis-1/6">
-          <div className="">
-            <Link
-              href={`/explore`}
-              className="flex items-center  border hover:border-purple-600 px-3 py-1 rounded-full"
-            >
-              <p className="text-center mx-auto">Dummy</p>
-            </Link>
-          </div>
-        </CarouselItem>
-        <CarouselItem className="basis-1/3 lg:basis-1/6">
-          <div className="">
-            <Link
-              href={`/explore`}
-              className="flex items-center  border hover:border-purple-600 px-3 py-1 rounded-full"
-            >
-              <p className="text-center mx-auto">Dummy</p>
-            </Link>
-          </div>
-        </CarouselItem>
       </CarouselContent>
       <CarouselPrevious />
       <CarouselNext />

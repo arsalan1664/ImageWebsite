@@ -6,6 +6,13 @@ import { db } from "@/lib/db";
 import BackButton from "./BackButton";
 import Image from "next/image";
 
+export async function generateStaticParams() {
+  const Posts = await db.posts.findMany();
+  return Posts?.map((item: any) => ({
+    id: item.id,
+  }));
+}
+
 async function Page({ params }: { params: any }) {
   const data = await db.posts.findUnique({
     where: {
@@ -21,7 +28,7 @@ async function Page({ params }: { params: any }) {
   });
   const tags: string[] = [];
   const imageUrl = data?.imageUrl as string;
-  data?.postTags.forEach((item) => {
+  data?.postTags.forEach((item: any) => {
     const title = item.tag?.title as string;
     tags.push(title);
   });

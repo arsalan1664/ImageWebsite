@@ -60,7 +60,7 @@ export function DeleteButton({ id }: { id: string }) {
             </div>
           </div>
           <DialogFooter>
-            <DynamicButton title="Delete Section" />
+            <DynamicButton title="Delete Category" />
           </DialogFooter>
         </form>
       </DialogContent>

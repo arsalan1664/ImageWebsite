@@ -2,6 +2,13 @@ import { db } from "@/lib/db";
 import Images from "../../../_components/Images";
 import Image from "next/image";
 
+export async function generateStaticParams() {
+  const categories = await db.categories.findMany();
+  return categories?.map((item: any) => ({
+    id: item.id,
+  }));
+}
+
 export default async function Category({ params }: { params: { id: string } }) {
   const id = params.id;
 

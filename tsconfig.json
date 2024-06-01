@@ -28,6 +28,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/(Protected)/panel/(Admin)/post"
-  ],
+, "test.js"  ],
   "exclude": ["node_modules"]
 }

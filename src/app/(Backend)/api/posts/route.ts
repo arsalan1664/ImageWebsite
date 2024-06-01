@@ -120,6 +120,7 @@ export async function GET(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       { error: "Something went wrong" },
       { status: 500 }
@@ -252,7 +253,7 @@ export async function DELETE(request: NextRequest) {
 
     if (postToDelete && postToDelete.postTags.length > 0) {
       await Promise.all(
-        postToDelete.postTags.map((tag) =>
+        postToDelete.postTags.map((tag: any) =>
           db.postTag.delete({ where: { id: tag.id } })
         )
       );
